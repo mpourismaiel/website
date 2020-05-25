@@ -18,150 +18,111 @@
 </script>
 
 <script>
-  import BookPreview from '../components/BookPreview.svelte';
-  export let books;
   export let posts;
 </script>
 
 <style lang="scss">
-  .books {
-    margin: 25px -15px;
-    padding: 15px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  @import '../utils/theme';
 
-    [class*='-intro'] {
-      margin-top: 0;
-    }
-
-    .inner {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 15px;
-
-      @media screen and (max-width: 700px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-  }
-
-  .with-more {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
-  :global(.more) {
-    display: flex;
-    align-items: center;
-    color: var(--darkerAccent);
-
-    i {
-      margin-left: 5px;
-    }
-  }
-
-  h3[class*='-intro'] {
-    margin-top: 60px;
-    font-size: 32px;
+  .section-title {
+    font-size: 18px;
     font-weight: bold;
-    color: var(--darkerAccent);
-
-    @media screen and (max-width: 700px) {
-      font-size: 22px;
-    }
+    color: var(--white);
   }
 
-  .blog-post {
-    &:first-child {
-      font-size: 16px;
-      color: var(--text);
+  .about {
+    h2,
+    .info {
+      grid-column: 2;
+    }
 
-      .blog-post-summary {
-        margin-left: 0;
+    .info {
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #{transparentize($muted, 0.7)};
+    }
+
+    p {
+      margin: 0 0 5px;
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--white);
+      transition: all 0.2s ease-out;
+      text-shadow: 0 0 4px transparent;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: var(--primary);
+        text-shadow: 0 0 4px var(--primary);
       }
     }
-
-    &-title {
-      color: var(--lighterAccent);
-
-      &.big h2 {
-        color: var(--accent);
-        font-size: 40px;
-        font-weight: bold;
-        margin-bottom: 0;
-
-        @media screen and (max-width: 700px) {
-          font-size: 28px;
-        }
-      }
-
-      h2 {
-        font-size: 26px;
-        font-weight: normal;
-
-        @media screen and (max-width: 700px) {
-          font-size: 20px;
-        }
-      }
-    }
-
-    &-meta {
-      color: var(--info);
-      font-size: 14px;
-    }
-
-    &-summary {
-      font-size: 18px;
-      margin-left: 10px;
-    }
   }
 
-  :global(.blog-post .more) {
-    display: inline-flex;
-    font-size: 0.9em;
-
-    &,
-    i {
-      margin-left: 5px;
-    }
-  }
-
-  mark {
-    color: var(--accent);
-    background-color: transparent;
-  }
-
-  .intro {
-    height: 100vh;
-    max-height: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    * {
-      width: 100%;
-      max-width: 500px;
-      text-align: left;
+  .posts {
+    h2,
+    ul {
+      grid-column: 2;
     }
 
-    .hi {
-      font-size: 22px;
-    }
-
-    .name {
-      display: inline;
-      font-size: 40px;
-      font-weight: bold;
-      background-color: transparent;
-      margin: 5px 0;
-    }
-
-    .subtitle {
+    ul {
       margin: 0;
-      color: var(--info);
+      padding: 0;
+      list-style: none;
+    }
+
+    .posts-list {
+      margin-top: 20px;
+    }
+
+    .post-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--white);
+    }
+
+    .post-title {
+      margin: 0;
+      text-shadow: 0 0 4px transparent;
+      transition: all 0.2s ease-out;
+    }
+
+    .post-meta,
+    .post-summary {
+      color: var(--muted);
+    }
+
+    .post-meta {
+      margin-bottom: 10px;
+    }
+
+    .post-summary {
+      transition: all 0.2s ease-out;
+
+      :global(p) {
+        margin: 0;
+      }
+    }
+
+    .post {
+      &:not(:last-child) {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #{transparentize($muted, 0.7)};
+      }
+
+      &:hover {
+        .post-title {
+          color: var(--primary);
+          text-shadow: 0 0 4px var(--primary);
+        }
+
+        .post-summary {
+          color: var(--white);
+        }
+      }
     }
   }
 </style>
@@ -170,64 +131,40 @@
   <title>Sapper project template</title>
 </svelte:head>
 
-<div class="intro">
-  <div class="hi">
-    <mark>Hi,</mark>
-    my name is
+<section class="about container">
+  <h2 class="section-title">About Me</h2>
+  <div class="info">
+    <p>
+      My name is Mahdi Pourismaiel. I am a web developer, specializing in front
+      end development. I use React, Svelte, Hugo and Gatsby to do my work.
+    </p>
+    <p>
+      I'm very proud of the work I do with Okkur Labs, and I also work on my own
+      fun projects.
+    </p>
+    <p>
+      You can check out my work on my
+      <a href="https://github.com/mpourismaiel">Github profile</a>
+      .
+    </p>
   </div>
-  <div>
-    <h1 class="name">Mahdi Pourismaiel</h1>
-    <span class="dot">.</span>
-  </div>
-  <p class="subtitle">
-    I am a Front-end Developer with a passion for games.
-    <br />
-    You can check out my
-    <mark>
-      <a href="https://github.com/mpourismaiel">Github!</a>
-    </mark>
-  </p>
-</div>
+</section>
 
-<div class="books">
-  <div class="with-more">
-    <h3 class="books-intro">Books I recommend!</h3>
-    <a class="more" rel="prefetch" href="books">
-      See More
-      <i class="ti ti-arrow-right" />
-    </a>
-  </div>
-  <div class="inner">
-    {#each books.slice(0, 4) as book (book.title)}
-      <BookPreview {book} />
+<section class="posts container">
+  <h2 class="section-title">Latest Posts</h2>
+  <ul class="posts-list">
+    {#each posts as post (post.slug)}
+      <li class="post">
+        <a href="blog/{post.slug}" rel="prefetch">
+          <h3 class="post-title">{post.title}</h3>
+          <div class="post-meta">
+            <time>{post.date}</time>
+          </div>
+          <div class="post-summary">
+            {@html post.summary}
+          </div>
+        </a>
+      </li>
     {/each}
-  </div>
-</div>
-
-<div class="blog-post-latest-title">
-  <span>Latest posts</span>
-</div>
-<div class="blog">
-  <article class="blog-post latest">
-    <a class="blog-post-title big" rel="prefetch" href="blog/{posts[0].slug}">
-      <h2>{posts[0].title}</h2>
-    </a>
-    <div class="blog-post-meta">{posts[0].date}</div>
-    <div class="blog-post-summary">
-      {@html posts[0].summary}
-    </div>
-  </article>
-  {#each posts.slice(1) as post (post.title)}
-    <article class="blog-post">
-      <a class="blog-post-title" rel="prefetch" href="blog/{post.slug}">
-        <h2>
-          {post.title}
-          <span class="blog-post-meta">{post.date}</span>
-        </h2>
-      </a>
-      <div class="blog-post-summary">
-        {@html post.summary}
-      </div>
-    </article>
-  {/each}
-</div>
+  </ul>
+</section>

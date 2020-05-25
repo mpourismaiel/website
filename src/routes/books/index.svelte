@@ -12,22 +12,27 @@
 </script>
 
 <style lang="scss">
+  .books-intro,
   .books {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 15px;
+    grid-column: 2;
+  }
 
-    &-intro {
-      margin-top: 0;
-      font-size: 32px;
-      font-weight: bold;
-    }
+  .books-intro {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--white);
+  }
+
+  .books {
+    margin-top: 20px;
   }
 </style>
 
-<h2 class="books-intro">Books I recommend!</h2>
-<div class="books">
-  {#each books as book (`${book.title} by ${book.author}`)}
-    <BookPreview {book} />
-  {/each}
-</div>
+<section class="container">
+  <h2 class="books-intro">Books I recommend!</h2>
+  <div class="books">
+    {#each books as book (`${book.title} by ${book.author}`)}
+      <BookPreview {book} />
+    {/each}
+  </div>
+</section>

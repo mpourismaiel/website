@@ -3,39 +3,66 @@
 </script>
 
 <style lang="scss">
-  img {
-    width: 100%;
-    max-height: 250px;
-    object-fit: cover;
+  @import '../utils/theme';
 
-    @media screen and (max-width: 700px) {
-      max-height: 200px;
+  .book {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #{transparentize($primary, 0.8)};
     }
-  }
 
-  .title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: var(--accent);
+    img {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      margin: 10px 10px 10px 0;
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
 
-    @media screen and (max-width: 700px) {
+      @media screen and (max-width: 700px) {
+        max-height: 200px;
+      }
+    }
+
+    .title {
+      grid-column: 2;
       font-size: 18px;
-    }
-  }
+      font-weight: bold;
+      margin: 10px 0 0;
+      color: var(--white);
+      text-shadow: 0 0 4px transparent;
+      transition: all 0.2s ease-out;
 
-  .author {
-    font-size: 14px;
-    font-weight: normal;
-    color: var(--info);
-    margin: 0;
+      @media screen and (max-width: 700px) {
+        font-size: 18px;
+      }
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      .title {
+        color: var(--primary);
+        text-shadow: 0 0 4px var(--primary);
+      }
+    }
+
+    .author {
+      grid-column: 2;
+      font-size: 14px;
+      font-weight: normal;
+      color: var(--muted);
+      margin: 0;
+    }
   }
 </style>
 
-<div>
-  <a rel="prefetch" href="books/{book.slug}">
-    <img src={book.cover} alt={book.title} />
+<a rel="prefetch" href="books/{book.slug}" class="book">
+  <img src={book.cover} alt={book.title} />
+  <div>
     <h2 class="title">{book.title}</h2>
-  </a>
-  <h4 class="author">By {book.author}</h4>
-</div>
+    <h4 class="author">By {book.author}</h4>
+  </div>
+</a>

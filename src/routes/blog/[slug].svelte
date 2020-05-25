@@ -18,18 +18,55 @@
 </script>
 
 <style lang="scss">
-  h1 {
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 0;
+  .post {
+    grid-column: 2;
   }
 
-  .content :global(h2) {
+  .actions {
+    margin-bottom: 20px;
+
+    .action {
+      display: flex;
+      align-items: center;
+      color: var(--muted);
+      font-weight: bold;
+
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .post-title {
+    color: var(--white);
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .post-title {
+    margin: 0;
+    text-shadow: 0 0 4px transparent;
+    transition: all 0.2s ease-out;
+  }
+
+  .post-meta {
+    color: var(--muted);
+  }
+
+  .post-meta {
+    margin-bottom: 10px;
+  }
+
+  .post-content {
+    color: var(--white);
+  }
+
+  .post-content :global(h2) {
     font-size: 1.4em;
     font-weight: 500;
   }
 
-  .content :global(pre) {
+  .post-content :global(pre) {
     background-color: #f9f9f9;
     box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.05);
     padding: 0.5em;
@@ -37,16 +74,16 @@
     overflow-x: auto;
   }
 
-  .content :global(pre) :global(code) {
+  .post-content :global(pre) :global(code) {
     background-color: transparent;
     padding: 0;
   }
 
-  .content :global(ul) {
+  .post-content :global(ul) {
     line-height: 1.5;
   }
 
-  .content :global(li) {
+  .post-content :global(li) {
     margin: 0 0 0.5em 0;
   }
 </style>
@@ -55,11 +92,21 @@
   <title>{post.title}</title>
 </svelte:head>
 
-<article class="blog-post">
-  <h1>{post.title}</h1>
-  <div class="blog-post-meta">{post.date}</div>
+<div class="container">
+  <article class="post">
+    <div class="actions">
+      <a href="blog" rel="prefetch" class="action">
+        <i class="gg-arrow-left" />
+        <span>Back</span>
+      </a>
+    </div>
+    <h1 class="post-title">{post.title}</h1>
+    <div class="post-meta">
+      <time>{post.date}</time>
+    </div>
 
-  <div class="content">
-    {@html post.html}
-  </div>
-</article>
+    <div class="post-content">
+      {@html post.html}
+    </div>
+  </article>
+</div>
